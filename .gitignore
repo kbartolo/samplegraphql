@@ -1,0 +1,6 @@
+coverage/
+lib/
+node_modules/
+.docz
+.idea
+.DS_Store

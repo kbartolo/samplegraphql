@@ -1,66 +1,20 @@
 import express from "express";
-import mongoose from "mongoose";
-import { ApolloServer } from "apollo-server-express"; // Integrating Graphql with Express
-//import models from "./models"; // MongoDb Models
-import Guide from "./models/guide";
-import typeDefs from "./types/guides";
-import resolvers from "./resolvers/guides";
+import graphqlHTTP from "express-graphql";
+import { buildSchema } from "graphql";
+
+import typeDefs from "./types/guides/index";
+import rootValue from "./resolvers/index";
+
+const schema = buildSchema(typeDefs);
 
 const app = express();
-
-mongoose
-  .connect("mongodb://localhost/graphql-mongo", { useNewUrlParser: true })
-  .then(() => console.log("connected to db"))
-  .catch(err => console.log(err));
-
-// settings
-app.set("port", process.env.PORT || 4000);
-
-//typedefs: equivalent to propertyes
-//resolvers: equivalent to methods
-const SERVER = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: {
-    Guide
-  },
-  introspection: true,
-  playground: true,
-  playground: {
-    endpoint: `http://localhost:4000/graphql`,
-    settings: {
-      "editor.theme": "dark"
-    }
-  }
-});
-
-SERVER.applyMiddleware({
-  app
-});
-
-// start the server
-app.listen(app.get("port"), () => {
-  console.log("server on port", app.get("port"));
-});
-
-/* const schema = makeExecutableSchema({
-  typeDefs,
-  resolvers
-});
-
 app.use(
   "/graphql",
-  express.json(),
-  graphqlExpress({
+  graphqlHTTP({
     schema,
-    context: {
-      Client
-    }
+    rootValue,
+    graphiql: true
   })
 );
 
-// start the server
-app.listen(app.get("port"), () => {
-  console.log("server on port", app.get("port"));
-});
- */
+app.listen(4000);

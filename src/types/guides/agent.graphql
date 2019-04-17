@@ -1,9 +1,7 @@
-export default `
-    type Agent {
+type Agent {
     id: ID!
     name: String!
     clients: [Client!]!
     lastModifiedDate: String!
     lastUpdatedBy: Agent!
-    }
-`;
+}

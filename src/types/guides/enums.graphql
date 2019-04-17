@@ -1,0 +1,6 @@
+
+enum GuideType {
+  ALL
+  DEFAULT
+  CUSTOM
+}

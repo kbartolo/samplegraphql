@@ -1,0 +1,16 @@
+type Guide {
+  id: ID!
+  name: String!
+  owner: Agent!
+  isDefault: Boolean!
+  type(type: GuideType): String!
+  steps: [Step!]!
+  introduction: Introduction!
+  createdAt: String!
+  lastModifiedDate: String!
+  lastUpdatedBy: Agent!
+}
+
+type Query{
+  allGuides(type:GuideType) : [Guide!]!
+}

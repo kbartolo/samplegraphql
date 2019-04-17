@@ -1,8 +1,8 @@
 export default {
-  /* Query: { */
-  allClients: (parent, args, { Client }) => {
-    const clients = Client.find();
-    return clients;
+  Query: {
+    allClients: (parent, args, { Client }) => {
+      const clients = Client.find();
+      return clients;
+    }
   }
-  /* } */
 };

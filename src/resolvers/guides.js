@@ -1,8 +1,9 @@
 export default {
-  /* Query: { */
-  allGuides: (parent, args, { Guide }) => {
-    const guides = Guide.find();
-    return guides;
-  }
-  /* } */
+  Query: {
+    allGuides: (parent, args, { Guide }) => {
+      const guides = Guide.find();
+      return guides;
+    }
+  },
+  Mutation: {}
 };
